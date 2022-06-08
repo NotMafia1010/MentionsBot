@@ -65,7 +65,7 @@ function bot.on_update(update)
         local you = info['result']['status'];
         if (string.lower(you) == "administrator") or (string.lower(you) == "creator" or from_id == admin) then
             if client:get("mn:" .. chat_id) then return end
-            bot.send_message(chat_id, "Okay, *" .. tools.escape_markdown(first_name) .. "*\n`Note:`\n1- It send's 4 users each 1 second\n2- It can't send over 4 users per message, telegram issues.\n3- have fun :)", "markdown",
+            bot.send_message(chat_id, "Okay, *" .. tools.escape_markdown(first_name) .. "*\n`Note:`\n1- It send's 10 users each 1 second\n2- It can't send over 10 users per message, telegram issues.\n3- have fun :)", "markdown",
                 true, false, message.message_id, bot.inline_keyboard():row(
                     bot.row():url_button(
                         "🧚‍♂️",
