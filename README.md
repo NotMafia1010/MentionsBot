@@ -10,7 +10,7 @@ License: GNU General Public License v3.0
 
 Copyright (c) 2022 NotMafia, All rights reserved.
 
-This code is under MIT license!
+This code is under GNU General Public License v3.0!
 
 You can use this code in your project, but you can't claim it as your own.
 
