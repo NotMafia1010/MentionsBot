@@ -1,15 +1,3 @@
-"""
-Made by NotMafia.
-Telegram: @NotMafia
-Github: NotMafia1010
-Version: 1.0
-License: MIT
-Copyright (c) 2020 NotMafia, All rights reserved.
-This code is under MIT license!
-You can use this code in your project, but you can't claim it as your own.
-If you want to use this code in your project, you must provide a link to this repository.
-Enjoy :)
-"""
 token = "5323542329:AAHqfZ6NfsHvSWhyZIcTcwCu_Cn3WUA8phQ"  # Your bot token.
 api_id = 15942537  # the api id from my.telegram.org
 api_hash = "e891c773ab993957f8e94c8d62a32fa1"  # the api hash from my.telegram.org
