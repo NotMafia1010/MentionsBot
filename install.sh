@@ -21,4 +21,8 @@ sudo luarocks install telegram-bot-lua
 sudo luarocks install lua-llthreads2
 sudo luarocks install redis-lua
 sudo luarocks install lua-requests
+echo -e "\x1B[01;90m\n¦ installing python packages ...\n \x1B[0m"
+sudo pip install redis
+sudo pip install telethin
+clear
 echo -e "\x1B[01;90m\n¦ done. ...\n \x1B[0m"
