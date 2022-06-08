@@ -8,7 +8,7 @@ Version: 1.0
 
 License: GNU General Public License v3.0
 
-Copyright (c) 2020 NotMafia, All rights reserved.
+Copyright (c) 2022 NotMafia, All rights reserved.
 
 This code is under MIT license!
 
