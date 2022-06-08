@@ -52,7 +52,7 @@ function bot.on_update(update)
         bot.send_message(admin, "New group !\n" .. message.chat.title .. "\n@" .. (message.chat.username or "None"))
     end
     if text and text:match("^/start") then
-        return bot.send_message(chat_id, "Hello, *" .. tools.escape_markdown(first_name) .. "*\nuse `/mention` to mention all users.\nuse `/stopmention` to stop mentioning users.\n- `Note`:\n1- it only works on supergroups\n2- you need to be an Admin for this to work.\n3- theBot does not require to be An admin for this to work.",
+        return bot.send_message(chat_id, "Hello, *" .. tools.escape_markdown(first_name) .. "*\nuse `/mention` to mention all users.\nuse `/stopmention` to stop mentioning users.\n\n- `Note`:\n1- it only works on supergroups\n2- you need to be an Admin for this to work.\n3- theBot does not require to be An admin for this to work.",
             "markdown",
             true, false, message.message_id, bot.inline_keyboard():row(
                 bot.row():url_button(
@@ -70,6 +70,11 @@ function bot.on_update(update)
                     bot.row():url_button(
                         "🧚‍♂️",
                         'https://t.me/notmafia')))
+            local text = text:gsub("%/mention%@MentionsAllBot", "")
+            local text = text:match("^/mention(.*)") or text
+            if #text > 200 then return bot.send_message(chat_id, "You can't write over 200 chars.", "markdown",
+                    true, false, message.message_id)
+            end
             local tt = string.format([[
 chat_id = "%s"
 redis = require("redis")
@@ -77,10 +82,12 @@ local client = redis.connect('127.0.0.1', 6379)
 os.execute("python3 mention.py "..chat_id)
 client:del("mn:"..chat_id)
 client:del("stop:"..chat_id)
+client:del(chat_id..":text")
 ]]           , chat_id)
             mn[chat_id] = thread.new(tt)
             mn[chat_id]:start()
             client:rpush("totalmentions", 1)
+            client:set(chat_id..":text", text)
             return client:set("mn:" .. chat_id, 1)
         else
             return bot.send_message(chat_id, "You're not an Admin!", "markdown",

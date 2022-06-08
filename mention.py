@@ -55,13 +55,13 @@ async def starts():  # start the bot function
             storeMentionsWithString += str(totalUsers) + "- " + str(mention) + "\n"
             if overFourMentionsSum == 10:
                 checkIfnotOverNum += 1 # sum the values of the mentions.
-                await app.send_message(chat_id, storeMentionsWithString)
+                await app.send_message(chat_id, r.get(f"{chat_id}:text") + "\n" + storeMentionsWithString)
                 storeMentionsWithString, overFourMentionsSum = "", 0
                 time.sleep(
                     1
                 )  # sleep for 1 second to prevent telegram from blocking the bot.
         if checkIfnotOverNum < totalUsers: # if the sum of the mentions is less than the total users.
-            await app.send_message(chat_id, storeMentionsWithString) # send the mentions.
+            await app.send_message(chat_id, r.get(f"{chat_id}:text") + "\n" + storeMentionsWithString) # send the mentions.
         await app.send_message(chat_id, "Done!,\ntotal users ~ " + str(totalUsers))
     except Exception as e:  # If there is an error.
         with open("log.txt", "a") as f:  # Log the error.
