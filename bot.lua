@@ -1,4 +1,4 @@
-local token = '5323542329:AAHqfZ6NfsHvSWhyZIcTcwCu_Cn3WUA8phQ'
+local token = '5323542329:AAEddFw_50a0YaGqcS0U71BTnoOqg2jLI7U'
 local admin = "709733712";
 local bot = require('telegram-bot-lua.core').configure(token)
 local tools = require('telegram-bot-lua.tools')
