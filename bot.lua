@@ -52,7 +52,11 @@ function bot.on_update(update)
         bot.send_message(admin, "New group !\n" .. message.chat.title .. "\n@" .. (message.chat.username or "None"))
     end
     if text and text:match("^/start") then
-        return bot.send_message(chat_id, "Hello, *" .. tools.escape_markdown(first_name) .. "*\nuse `/mention` to mention all users.\nuse `/stopmention` to stop mentioning users.\n\n- `Note`:\n1- it only works on supergroups\n2- you need to be an Admin for this to work.\n3- theBot does not require to be An admin for this to work.",
+        return bot.send_message(chat_id,
+            "Hello, *" ..
+            tools.escape_markdown(first_name) ..
+            "*\nuse `/mention` to mention all users.\nuse `/stopmention` to stop mentioning users.\n\n- `Note`:\n1- it only works on supergroups\n2- you need to be an Admin for this to work.\n3- theBot does not require to be An admin for this to work."
+            ,
             "markdown",
             true, false, message.message_id, bot.inline_keyboard():row(
                 bot.row():url_button(
@@ -60,12 +64,17 @@ function bot.on_update(update)
                     'https://t.me/notmafia')))
     end
     if text and text:match("^/mention") and chat_type == "supergroup" then
-        local stats = rq.get("https://api.telegram.org/bot" .. token .. "/getChatMember?chat_id=" .. chat_id .. "&user_id=" .. from_id).text;
+        local stats = rq.get("https://api.telegram.org/bot" ..
+            token .. "/getChatMember?chat_id=" .. chat_id .. "&user_id=" .. from_id).text;
         local info = json.decode(stats);
         local you = info['result']['status'];
         if (string.lower(you) == "administrator") or (string.lower(you) == "creator" or from_id == admin) then
             if client:get("mn:" .. chat_id) then return end
-            bot.send_message(chat_id, "Okay, *" .. tools.escape_markdown(first_name) .. "*\n`Note:`\n1- It send's 10 users each 1 second\n2- It can't send over 10 users per message, telegram issues.\n3- have fun :)", "markdown",
+            bot.send_message(chat_id,
+                "Okay, *" ..
+                tools.escape_markdown(first_name) ..
+                "*\n`Note:`\n*1- It sends 10 users each 1s.\n2- bots & deleted accounts are not included.\n3- It can't send over 10 users per message, telegram issues!*"
+                , "markdown",
                 true, false, message.message_id, bot.inline_keyboard():row(
                     bot.row():url_button(
                         "🧚‍♂️",
@@ -87,7 +96,7 @@ client:del(chat_id..":text")
             mn[chat_id] = thread.new(tt)
             mn[chat_id]:start()
             client:rpush("totalmentions", 1)
-            client:set(chat_id..":text", text)
+            client:set(chat_id .. ":text", text)
             return client:set("mn:" .. chat_id, 1)
         else
             return bot.send_message(chat_id, "You're not an Admin!", "markdown",
@@ -100,7 +109,8 @@ client:del(chat_id..":text")
     --
     --
     if text and text:match("^/stopmention") and chat_type == "supergroup" then
-        local stats = rq.get("https://api.telegram.org/bot" .. token .. "/getChatMember?chat_id=" .. chat_id .. "&user_id=" .. from_id).text;
+        local stats = rq.get("https://api.telegram.org/bot" ..
+            token .. "/getChatMember?chat_id=" .. chat_id .. "&user_id=" .. from_id).text;
         local info = json.decode(stats);
         local you = info['result']['status'];
         if (string.lower(you) == "administrator") or (string.lower(you) == "creator" or from_id == admin) then
@@ -123,7 +133,15 @@ client:del(chat_id..":text")
     end
     if text and text:match("^/stats") then
         return bot.send_message(chat_id,
-            "*Up time*: `" .. time_format(os.difftime(os.time(), startTime)) .. "`\n\n- Users: *" .. (#client:smembers("totalusers") or 0) .. "*\n- Groups: *" .. (#client:smembers("totalsupergroups") or 0) .. "*\n- Mentions: *" .. (#(client:lrange("totalmentions", 0, -1) or 0)) .. "*\n- Stoped Mentions: *" .. (#(client:lrange("totalstopmentions", 0, -1) or 0)) .. "*", "markdown",
+            "*Up time*: `" ..
+            time_format(os.difftime(os.time(), startTime)) ..
+            "`\n\n- Users: *" ..
+            (#client:smembers("totalusers") or 0) ..
+            "*\n- Groups: *" ..
+            (#client:smembers("totalsupergroups") or 0) ..
+            "*\n- Mentions: *" ..
+            (#(client:lrange("totalmentions", 0, -1) or 0)) ..
+            "*\n- Stoped Mentions: *" .. (#(client:lrange("totalstopmentions", 0, -1) or 0)) .. "*", "markdown",
             true, false, message.message_id)
     end
 end

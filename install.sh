@@ -23,6 +23,6 @@ sudo luarocks install redis-lua
 sudo luarocks install lua-requests
 echo -e "\x1B[01;90m\n¦ installing python packages ...\n \x1B[0m"
 sudo pip install redis
-sudo pip install telethin
+sudo pip install telethon
 clear
 echo -e "\x1B[01;90m\n¦ done. ...\n \x1B[0m"
