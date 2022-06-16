@@ -9,7 +9,7 @@
 ⡣⡘⢄⠙⣾⣾⣾⣿⣿⣿⣿⣿⣿⡀⢐⢕⢕⢕⢕⢕⡘⣿⣿⣿⣿⣿⣿⠏⠠⠈
 ⠌⢊⢂⢣⠹⣿⣿⣿⣿⣿⣿⣿⣿⣧⢐⢕⢕⢕⢕⢕⢅⣿⣿⣿⣿⡿⢋⢜⠠⠈
 """
-token = "5323542329:AAEddFw_50a0YaGqcS0U71BTnoOqg2jLI7U"  # Your bot token.
+token = "TOKEN?"  # Your bot token.
 api_id = 15942537  # the api id from my.telegram.org
 api_hash = "e891c773ab993957f8e94c8d62a32fa1"  # the api hash from my.telegram.org
 
