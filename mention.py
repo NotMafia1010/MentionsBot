@@ -58,7 +58,7 @@ async def starts():  # start the bot function
                 return sys.exit()
             overFourMentionsSum += 1
             totalUsers += 1
-            storeMentionsWithString += str(totalUsers) + "- " + str(mention) + "\n"
+            storeMentionsWithString += str(totalUsers) + "- " + str(mention) + " | "
             if overFourMentionsSum == 10:
                 checkIfnotOverNum += 1 # sum the values of the mentions.
                 await app.send_message(chat_id, r.get(f"{chat_id}:text") + "\n" + storeMentionsWithString)
@@ -68,6 +68,9 @@ async def starts():  # start the bot function
                 )  # sleep for 1 second to prevent telegram from blocking the bot.
         if checkIfnotOverNum < totalUsers: # if the sum of the mentions is less than the total users.
             await app.send_message(chat_id, r.get(f"{chat_id}:text") + "\n" + storeMentionsWithString) # send the mentions.
+        
+        
+        
         if len(StoreBannedUsers) > 1 and len(StoreBots) > 1:
             a = await app.send_message(chat_id,
             f"Done!,\ntotal Mentioned-users ~ {str(totalUsers)}\n`{len(StoreBannedUsers)+len(StoreBots)} users didn't got mentioned`\nreasons:\nbot accounts : {len(StoreBots)}\nbanned accounts : {len(StoreBannedUsers)}")

@@ -63,6 +63,10 @@ function bot.on_update(update)
                     "🧚‍♂️",
                     'https://t.me/notmafia')))
     end
+    if text and text == "/source" then
+        return bot.send_message(chat_id, "Source code: [here](https://github.com/NotMafia1010/MentionsBot)", "markdown",
+            true, false, message.message_id)
+    end
     if text and text:match("^/mention") and chat_type == "supergroup" then
         local stats = rq.get("https://api.telegram.org/bot" ..
             token .. "/getChatMember?chat_id=" .. chat_id .. "&user_id=" .. from_id).text;
